@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/navScroll.css">
+    <link rel="stylesheet" href="menuBar.css">
+    <title>Todo meu</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+        a{
+            color: #000;
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+            text-decoration: none;
+        }
+        a:hover{
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .logo{
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        header{
+            box-sizing: border-box;
+            height: 70px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #e7e7e7;
+        }
+        .menu{
+            display: flex;
+            /* justify-content: space-between; */
+            gap: 5.5rem;
+        }
+        .menu a{
+            display: block;
+            padding: .5rem;
+        }
+        #btn-mobile{
+            display: none;
+        }
+
+        section >article{
+            background-color: pink;
+            width: 350px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            margin: 10px auto;
+        }
+
+        /* screen media */
+        @media (max-width:650px){
+            .menu{
+                display: block;
+                position: absolute;
+                width: 100%;
+                top: 70px;
+                right: 0;
+                background: #e7e7e7;
+                transition: .6s;
+                z-index: 1000;
+                height: 0px;
+                visibility: visible;
+                overflow-y: auto;
+            }
+            nav.active .menu{
+                height: calc(100vh - 70px);
+                /* visibility: visible;
+                overflow-y: auto; */
+            }
+            .menu a{
+                padding: 1rem 0;
+                margin: 0 1rem;
+                border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+            }
+            #btn-mobile{
+                display: flex;
+                padding: .5rem 1rem;
+                font-size: 1rem;
+                border: none;
+                background: none;
+                cursor: pointer;
+                gap: .5rem;
+            }
+            .hamburger{
+                border-top: 2px solid;
+                width: 20px;
+            }
+            .hamburger::after,
+            .hamburger::before{
+                content: '';
+                display: block;
+                width: 20px;
+                height: 2px;
+                background: currentColor;
+                margin-top: 5px;
+                transition: .3s;
+                position: relative;
+            }
+            nav.active .hamburger{
+                border-top-color: transparent;
+            }
+            nav.active .hamburger::before{
+                transform: rotate(135deg);
+            }
+            nav.active .hamburger::after{
+                transform: rotate(-135deg);
+                top: -7px;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Logo</a>
+        <nav>
+            <button id="btn-mobile" aria-label="Open Menu" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="menu">
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contacts</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <article>1</article>
+        <article>2</article>
+        <article>3</article>
+        <article>4</article>
+    </section>
+
+    <script>
+        const btnMobile = document.getElementById('btn-mobile');
+        const nav = document.querySelector('nav');
+
+        btnMobile.addEventListener('click', toggleMenu, false);
+        btnMobile.addEventListener('touchstart', toggleMenu, false)
+
+        function toggleMenu(e){
+            if(e.type === 'touchstart') e.preventDefault(); 
+            nav.classList.toggle('active')
+
+            //Acessibilidade
+            const active =nav.classList.contains('active');
+            e.currentTarget.setAttribute('aria-label', active);
+
+            //Acessibilidade, change aria-label(description)
+            if(active){
+                e.currentTarget.setAttribute('aria-label', 'Close Menu')
+            } else {
+                e.currentTarget.setAttribute('aria-label', 'Open Menu')
+            }
+        }
+    </script>
+</body>
+</html>
