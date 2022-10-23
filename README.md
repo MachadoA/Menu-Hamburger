@@ -1,2 +1,2 @@
 # Menu-Hamburger
-Hamburger responsive
+Hamburger responsive with JS
