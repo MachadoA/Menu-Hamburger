@@ -133,9 +133,9 @@
                 <span class="hamburger"></span>
             </button>
             <ul class="menu">
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contacts</a></li>
+                <li><a class="btn-menu" href="#">Profile</a></li>
+                <li><a class="btn-menu" href="#">About</a></li>
+                <li><a class="btn-menu" href="#">Contacts</a></li>
             </ul>
         </nav>
     </header>
@@ -169,6 +169,12 @@
                 e.currentTarget.setAttribute('aria-label', 'Open Menu')
             }
         }
+        
+        document.querySelectorAll('.btn-menu').forEach((link) =>
+        link.addEventListener("click", () => {
+            nav.classList.remove('active')
+        })
+)
     </script>
 </body>
 </html>
